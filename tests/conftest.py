@@ -1,5 +1,5 @@
 import pytest
-from selene import Browser, Config, browser
+from selene import browser
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
@@ -22,8 +22,6 @@ def browser_management(request):
         command_executor=f"https://user1:1234@selenoid.autotests.cloud/wd/hub",
         options=options
     )
-
-    # browser = Browser(Config(driver=driver))
 
     browser.config.driver = driver
     browser.config.base_url = 'https://demoqa.com'
