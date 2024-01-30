@@ -13,7 +13,7 @@ def test_register_user_success():
     with allure.step('Fill in form'):
         browser.element('#firstName').type('Jane')
         browser.element('#lastName').type('Doe')
-        browser.element('#userEmail').type('some@mail.ru')
+        browser.element('#userEmail').type('some@mail.su')
         browser.element('#dateOfBirthInput').click()
         browser.element('.react-datepicker__year-select').all('option').element_by(have.exact_text('1991')).click()
         browser.element('.react-datepicker__month-select').all('option').element_by(have.exact_text('January')).click()
@@ -33,3 +33,17 @@ def test_register_user_success():
 
     with allure.step('Submit form'):
         browser.element('#submit').press_enter()
+
+    with allure.step('Check registered user data'):
+        browser.element('.table').all('td').even.should(have.exact_texts(
+            'Jane Doe',
+            'some@mail.su',
+            'Female',
+            '1234567890',
+            '10 January,1991',
+            'Maths',
+            'Reading',
+            'windy_hill.jpg',
+            'Some address',
+            'NCR Delhi'
+        ))
